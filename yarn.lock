@@ -352,6 +352,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@faker-js/faker@7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.6.0.tgz#9ea331766084288634a9247fcd8b84f16ff4ba07"
+  integrity sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==
+
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -682,6 +687,15 @@
   dependencies:
     "@mikro-orm/knex" "~5.6.8"
     pg "8.8.0"
+
+"@mikro-orm/seeder@^5.6.8":
+  version "5.6.8"
+  resolved "https://registry.yarnpkg.com/@mikro-orm/seeder/-/seeder-5.6.8.tgz#c5962f1e3bba21538ed24350c60c0ea0238d5b35"
+  integrity sha512-nUsSynVo6yhJTcMgq337+FDJ5xqx9M9VIddJK2FXeCppSGZ4xGEwjSjbecLbc8J7FxsIkClttdev29BLz/LYmw==
+  dependencies:
+    "@faker-js/faker" "7.6.0"
+    fs-extra "11.1.0"
+    globby "11.1.0"
 
 "@nestjs/axios@^1.0.1":
   version "1.0.1"
@@ -1100,6 +1114,11 @@
   integrity sha512-X3HPWTwXRerBZS7Mo1k6vMVR1Z6zmJcDVn5O/31whe0tnjE4te6ZJSJGq1RiqHPjzPdMTfjCFogDJmwng9xHaQ==
   dependencies:
     "@types/superagent" "*"
+
+"@types/uuid@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.0.tgz#53ef263e5239728b56096b0a869595135b7952d2"
+  integrity sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==
 
 "@types/validator@^13.7.10":
   version "13.7.11"
