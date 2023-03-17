@@ -1,7 +1,6 @@
-import * as cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -22,18 +21,7 @@ async function bootstrap() {
     exposedHeaders: ['set-cookie'],
   });
 
-  // Swagger API Document
-  const swaggerConfig = new DocumentBuilder()
-    .setTitle('Chat Service API')
-    .setDescription(
-      'Optional multiline or single-line description in CommonMark](http://commonmark.org/help/) or HTML.',
-    )
-    .setVersion('0.1.0')
-    .build();
-  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('/swagger', app, swaggerDocument);
-
-  console.log(`Listening for HTTP on http://localhost:${APP_PORT}`);
+  console.info(`Listening for HTTP on http://localhost:${APP_PORT}`);
   app.enableShutdownHooks();
   await app.listen(APP_PORT);
 }

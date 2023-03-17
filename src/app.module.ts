@@ -5,6 +5,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import * as Joi from 'joi';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -29,6 +30,10 @@ const isDev = NODE_ENV === 'development';
         APP_PORT: Joi.number().required(),
       }),
     }),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -49,4 +54,4 @@ const isDev = NODE_ENV === 'development';
   controllers: [AppController],
   providers: [ConfigService],
 })
-export class AppModule {}
+export class AppModule { }
