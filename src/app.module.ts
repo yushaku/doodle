@@ -8,6 +8,7 @@ import * as Joi from 'joi';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { TerminusModule } from '@nestjs/terminus';
 import { AppService } from './app.service';
+import { MulterModule } from '@nestjs/platform-express';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -35,6 +36,9 @@ const isDev = NODE_ENV === 'development';
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 10,
+    }),
+    MulterModule.register({
+      dest: './uploads'
     }),
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
