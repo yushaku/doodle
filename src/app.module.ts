@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import * as Joi from 'joi';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { TerminusModule } from '@nestjs/terminus';
+import { AppService } from './app.service';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -50,8 +52,9 @@ const isDev = NODE_ENV === 'development';
       }),
     }),
     CommonModule,
+    TerminusModule,
   ],
   controllers: [AppController],
-  providers: [ConfigService],
+  providers: [ConfigService, AppService],
 })
 export class AppModule { }
