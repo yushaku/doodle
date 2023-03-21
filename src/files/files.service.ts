@@ -14,8 +14,12 @@ export class FilesService {
     const storePath = `${this.configService.get('FILE_PATH')}/${file.originalname}`;
 
     console.log(file)
-    const readStream = fs.createReadStream(file.originalname)
+    const readStream = fs.createReadStream(file.buffer)
     const writeStream = fs.createWriteStream(storePath)
+
+    readStream.on('data', (chunk) => {
+      console.log(chunk.toString())
+    })
 
     const ffmpegCommand = ffmpeg(readStream).outputOptions('-c copy').output(writeStream);
 
