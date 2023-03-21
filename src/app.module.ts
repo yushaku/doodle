@@ -9,7 +9,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { TerminusModule } from '@nestjs/terminus';
 import { AppService } from './app.service';
 import { MulterModule } from '@nestjs/platform-express';
-import { UploadModule } from './upload/upload.module';
+import { FilesModule } from './files/files.module';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -58,7 +58,7 @@ const isDev = NODE_ENV === 'development';
     }),
     CommonModule,
     TerminusModule,
-    UploadModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [ConfigService, AppService],

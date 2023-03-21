@@ -4,11 +4,29 @@ services:
   app:
     container_name: doodle-server
     image: doodle-server
+    restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     ports:
       - ${APP_PORT}:${APP_PORT}
+    command: yarn start
     volumes:
       - .:/app
       - /app/node_modules
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 4GB
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+    networks:
+      - common
+
+networks:
+  common:
+
+
+
