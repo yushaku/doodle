@@ -32,6 +32,13 @@ const isDev = NODE_ENV === 'development';
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRED_TIME: Joi.string().required(),
         APP_PORT: Joi.number().required(),
+
+        MINIO_ENDPOINT: Joi.string().required().default('localhost'),
+        MINIO_PORT: Joi.number().required().default(9000),
+        MINIO_SSL: Joi.boolean().required().default(false),
+        MINIO_ACCESS_KEY: Joi.string().required().default('minio'),
+        MINIO_SECRET_KEY: Joi.string().required(),
+        MINIO_BUCKET: Joi.string().required().default('doodle'),
       }),
     }),
     ThrottlerModule.forRoot({
@@ -39,7 +46,7 @@ const isDev = NODE_ENV === 'development';
       limit: 10,
     }),
     MulterModule.register({
-      dest: './store'
+      dest: './store',
     }),
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],

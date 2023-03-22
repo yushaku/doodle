@@ -1,5 +1,6 @@
 import { Options } from '@mikro-orm/core';
 import { ConfigService } from '@nestjs/config';
+import { UserEntity } from './databases/entities';
 
 const config = new ConfigService();
 
@@ -14,7 +15,7 @@ const MikroOrmConfig: Options = {
   user: config.get('DB_USER'),
   password: config.get('DB_PASS'),
   discovery: { warnWhenNoEntities: false },
-  entities: [],
+  entities: [UserEntity],
   migrations: {
     path: './dist/database/migrations',
     pathTs: './src/database/migrations',
