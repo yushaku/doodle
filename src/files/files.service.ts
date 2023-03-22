@@ -1,31 +1,32 @@
+import { MinioService } from '@/common/minio.service';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as ffmpeg from 'fluent-ffmpeg';
 import * as fs from 'fs';
 
 @Injectable()
 export class FilesService {
-
   constructor(
-    private configService: ConfigService
-  ) { }
+    private configService: ConfigService,
+    private minioService: MinioService,
+  ) {}
 
   async upload(file: Express.Multer.File) {
-    const storePath = `${this.configService.get('FILE_PATH')}/${file.originalname}`;
+    const storePath = `${this.configService.get('FILE_PATH')}/${
+      file.originalname
+    }`;
+    const writeStream = fs.createWriteStream(storePath);
+    writeStream.write(file.buffer);
+    writeStream.end();
+  }
 
-    console.log(file)
-    const readStream = fs.createReadStream(file.buffer)
-    const writeStream = fs.createWriteStream(storePath)
+  async uploadMinio(file: Express.Multer.File) {
+    return this.minioService.upload({
+      fileName: file.originalname,
+      buffer: file.buffer,
+    });
+  }
 
-    readStream.on('data', (chunk) => {
-      console.log(chunk.toString())
-    })
-
-    const ffmpegCommand = ffmpeg(readStream).outputOptions('-c copy').output(writeStream);
-
-    ffmpegCommand
-      .on('finish', () => console.log("success"))
-      .on('error', () => console.error('fail'))
-      .run()
+  async presignedMinio(fileName: string) {
+    return this.minioService.getPresignedUrl(fileName);
   }
 }

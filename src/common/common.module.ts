@@ -2,6 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { CommonService } from './common.service';
+import { MinioService } from './minio.service';
 
 @Global()
 @Module({
@@ -15,7 +16,7 @@ import { CommonService } from './common.service';
       }),
     }),
   ],
-  providers: [CommonService],
-  exports: [JwtModule, CommonService],
+  providers: [CommonService, MinioService],
+  exports: [JwtModule, CommonService, MinioService],
 })
-export class CommonModule {}
+export class CommonModule { }
