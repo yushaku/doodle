@@ -1,6 +1,7 @@
-import { Property } from "@mikro-orm/core";
+import { Entity, Property } from "@mikro-orm/core";
 import { BaseEntity } from "./base.entity";
 
+@Entity({ tableName: 'company' })
 export class UserEntity extends BaseEntity {
   @Property({ fieldName: 'name', type: String, nullable: true })
   name: string;
