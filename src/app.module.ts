@@ -61,6 +61,11 @@ const isDev = NODE_ENV === 'development';
         autoLoadEntities: true,
         discovery: { warnWhenNoEntities: false },
         debug: isDev ? true : false,
+        pool: {
+          min: 2,
+          max: 10,
+          idleTimeoutMillis: 1000,
+        },
       }),
     }),
     CommonModule,
@@ -70,4 +75,4 @@ const isDev = NODE_ENV === 'development';
   controllers: [AppController],
   providers: [ConfigService, AppService],
 })
-export class AppModule { }
+export class AppModule {}

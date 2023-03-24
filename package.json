@@ -30,7 +30,7 @@
     "@mikro-orm/nestjs": "^5.1.2",
     "@mikro-orm/postgresql": "^5.6.0",
     "@mikro-orm/reflection": "^5.4.2",
-    "@mikro-orm/seeder": "^5.60",
+    "@mikro-orm/seeder": "^5.6.8",
     "@nestjs/axios": "^1.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",

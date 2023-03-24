@@ -17,12 +17,12 @@ const MikroOrmConfig: Options = {
   discovery: { warnWhenNoEntities: false },
   entities: [UserEntity],
   migrations: {
-    path: './dist/database/migrations',
-    pathTs: './src/database/migrations',
+    path: './dist/databases/migrations',
+    pathTs: './src/databases/migrations',
   },
   seeder: {
-    path: './dist/database/seeders',
-    pathTs: './src/database/seeders',
+    path: './dist/databases/seeders',
+    pathTs: './src/databases/seeders',
   },
 };
 
