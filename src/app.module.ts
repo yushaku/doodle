@@ -41,10 +41,10 @@ const isDev = NODE_ENV === 'development';
         MINIO_BUCKET: Joi.string().required().default('doodle'),
       }),
     }),
-    ThrottlerModule.forRoot({
-      ttl: 60,
-      limit: 10,
-    }),
+    // ThrottlerModule.forRoot({
+    //   ttl: 60,
+    //   limit: 10,
+    // }),
     MulterModule.register({
       dest: './store',
     }),
