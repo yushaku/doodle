@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import {
   HealthCheckService,
-  MemoryHealthIndicator, MikroOrmHealthIndicator
+  MemoryHealthIndicator,
+  MikroOrmHealthIndicator,
 } from '@nestjs/terminus';
 
 @Injectable()
@@ -10,7 +11,7 @@ export class AppService {
     private health: HealthCheckService,
     private db: MikroOrmHealthIndicator,
     private memory: MemoryHealthIndicator,
-  ) { }
+  ) {}
 
   healthCheck() {
     return this.health.check([
@@ -19,5 +20,3 @@ export class AppService {
     ]);
   }
 }
-
-

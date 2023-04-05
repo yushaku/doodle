@@ -19,4 +19,4 @@ import { MinioService } from './minio.service';
   providers: [CommonService, MinioService],
   exports: [JwtModule, CommonService, MinioService],
 })
-export class CommonModule { }
+export class CommonModule {}

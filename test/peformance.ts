@@ -1,4 +1,3 @@
-
 import http from 'k6/http';
 import { sleep } from 'k6';
 
@@ -9,7 +8,7 @@ export const options = {
   ],
 };
 
-export default function() {
+export default function () {
   http.get('http://localhost:8005');
   sleep(1);
 }

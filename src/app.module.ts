@@ -21,13 +21,13 @@ const isDev = NODE_ENV === 'development';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        DB_TYPE: Joi.string().default('postgresql'),
-        DB_HOST: Joi.string().required(),
-        DB_PORT: Joi.number().required(),
-        DB_USER: Joi.string().required(),
-        DB_PASS: Joi.string().required(),
-        DB_MAIN: Joi.string().required(),
-        DB_TEST: Joi.string().required(),
+        // DB_TYPE: Joi.string().default('postgresql'),
+        // DB_HOST: Joi.string().required(),
+        // DB_PORT: Joi.number().required(),
+        // DB_USER: Joi.string().required(),
+        // DB_PASS: Joi.string().required(),
+        // DB_MAIN: Joi.string().required(),
+        // DB_TEST: Joi.string().required(),
 
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRED_TIME: Joi.string().required(),
@@ -39,7 +39,7 @@ const isDev = NODE_ENV === 'development';
       limit: 10,
     }),
     MulterModule.register({
-      dest: './store'
+      dest: './store',
     }),
     MikroOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -63,4 +63,4 @@ const isDev = NODE_ENV === 'development';
   controllers: [AppController],
   providers: [ConfigService, AppService],
 })
-export class AppModule { }
+export class AppModule {}
