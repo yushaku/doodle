@@ -1,16 +1,22 @@
-FROM node:16-alpine
+# build image
+FROM node:16.20-alpine AS builder
 
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package.json yarn.lock* ./
-RUN yarn && yarn cache clean
 
+ADD package.json yarn.lock /app/
+RUN yarn --pure-lockfile && rm -rf /app/node_modules
+
+# Runtime image from here
+FROM node:16.20-alpine AS Product
+
+EXPOSE 8005
+WORKDIR /app
+
+# Copy node_modules from builder image
+COPY --from=builder /app/package.json /app/yarn.lock ./
+COPY --from=builder /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED 1
 RUN yarn build
 
-ENV NODE_ENV production
-
-CMD ["./entrypoint.sh"]
-
+CMD ["yarn", "docker:start"]

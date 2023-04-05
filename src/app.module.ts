@@ -28,10 +28,9 @@ const isDev = NODE_ENV === 'development';
         // DB_PASS: Joi.string().required(),
         // DB_MAIN: Joi.string().required(),
         // DB_TEST: Joi.string().required(),
-
-        JWT_SECRET: Joi.string().required(),
-        JWT_EXPIRED_TIME: Joi.string().required(),
-        APP_PORT: Joi.number().required(),
+        // JWT_SECRET: Joi.string().required(),
+        // JWT_EXPIRED_TIME: Joi.string().required(),
+        // APP_PORT: Joi.number().required(),
       }),
     }),
     ThrottlerModule.forRoot({
