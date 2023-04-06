@@ -3,13 +3,13 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppController } from './app.controller';
-import * as Joi from 'joi';
-import { ThrottlerModule } from '@nestjs/throttler';
-import { TerminusModule } from '@nestjs/terminus';
-import { AppService } from './app.service';
 import { MulterModule } from '@nestjs/platform-express';
+import { ThrottlerModule } from '@nestjs/throttler';
+import * as Joi from 'joi';
 import { FilesModule } from './files/files.module';
+import { HealthModule } from './health/health.module';
+import { MetricModule } from './metric/metric.module';
+import { PrometheusModule } from './prometheus/prometheus.module';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -41,10 +41,10 @@ const isDev = NODE_ENV === 'development';
         MINIO_BUCKET: Joi.string().required().default('doodle'),
       }),
     }),
-    // ThrottlerModule.forRoot({
-    //   ttl: 60,
-    //   limit: 10,
-    // }),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
     MulterModule.register({
       dest: './store',
     }),
@@ -69,10 +69,11 @@ const isDev = NODE_ENV === 'development';
       }),
     }),
     CommonModule,
-    TerminusModule,
     FilesModule,
+    MetricModule,
+    HealthModule,
+    PrometheusModule,
   ],
-  controllers: [AppController],
-  providers: [ConfigService, AppService],
+  providers: [ConfigService],
 })
 export class AppModule {}

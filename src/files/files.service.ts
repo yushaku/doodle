@@ -10,6 +10,10 @@ export class FilesService {
     private minioService: MinioService,
   ) {}
 
+  public get isConnected(): boolean {
+    return true;
+  }
+
   async upload(file: Express.Multer.File) {
     const storePath = `${this.configService.get('FILE_PATH')}/${
       file.originalname
