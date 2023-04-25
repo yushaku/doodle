@@ -10,6 +10,8 @@ import { FilesModule } from './files/files.module';
 import { HealthModule } from './health/health.module';
 import { MetricModule } from './metric/metric.module';
 import { PrometheusModule } from './prometheus/prometheus.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -73,6 +75,8 @@ const isDev = NODE_ENV === 'development';
     MetricModule,
     HealthModule,
     PrometheusModule,
+    AuthModule,
+    UsersModule,
   ],
   providers: [ConfigService],
 })
