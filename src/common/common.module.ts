@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { CommonService } from './common.service';
 import { MinioService } from './minio.service';
-import { JwtStrategy } from './strategy';
+import { GoogleStrategy, JwtStrategy } from './strategy';
 
 @Global()
 @Module({
@@ -20,7 +20,7 @@ import { JwtStrategy } from './strategy';
       }),
     }),
   ],
-  providers: [CommonService, MinioService, JwtStrategy],
+  providers: [CommonService, MinioService, JwtStrategy, GoogleStrategy],
   exports: [JwtModule, CommonService, MinioService],
 })
 export class CommonModule {}

@@ -1,15 +1,18 @@
 import { JwtUser } from '@/common/decorators';
 import { JwtAuthGuard } from '@/common/guards';
+import RequestWithUser from '@/utils/requestWithUser.interface';
 import {
   Body,
   Controller,
   Get,
   HttpCode,
   Post,
+  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserDto } from './dto/user.dto';
@@ -25,6 +28,25 @@ export class UsersController {
   ) {
     this.isDevelopment =
       this.config.get('NODE_ENV') === 'development' ? true : false;
+  }
+
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  googleLogin(@Req() req: Request) {
+    console.log(req.headers);
+  }
+
+  @Get('redirect')
+  @UseGuards(AuthGuard('google'))
+  googleAuthRedirect(@Req() req: RequestWithUser) {
+    if (!req.user) {
+      return 'No user from google';
+    }
+
+    return {
+      message: 'User information from google',
+      user: req.user,
+    };
   }
 
   @Post('login')
