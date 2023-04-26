@@ -62,6 +62,12 @@ export class UsersController {
       .send({ status: 'register successfully' });
   }
 
+  @Post('logout')
+  @HttpCode(200)
+  async logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('access_token').send({ status: 'logout successfully' });
+  }
+
   @Get()
   @UseGuards(JwtAuthGuard)
   async getProfile(@JwtUser('userId') id: string) {

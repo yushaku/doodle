@@ -52,12 +52,6 @@ export class UsersService {
     return accessToken;
   }
 
-  getJwt(id: string) {
-    return this.common.createAccessToken({
-      userId: id,
-    });
-  }
-
   private async verifyPassword(
     plainTextPassword: string,
     hashedPassword: string,
