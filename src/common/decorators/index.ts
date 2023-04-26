@@ -1,1 +1,1 @@
-export * from './jwt-user.decorator';
+export * from './jwt.decorator';

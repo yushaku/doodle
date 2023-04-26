@@ -2,8 +2,7 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export type JwtDecoded = {
   iss: string;
-  user_id: string;
-  company_id: string;
+  userId: string;
 };
 
 export const JwtUser = createParamDecorator(

@@ -1,27 +1,29 @@
 import { UserEntity } from '@/databases/entities';
+import { EntityRepository } from '@mikro-orm/core';
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateUserDto } from './dto/createUser.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
-    private usersRepository: Repository<User>,
+    private usersRepository: EntityRepository<UserEntity>,
   ) {}
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find((user) => user.username === username);
+  async getByEmail(email: string) {
+    return this.usersRepository.findOne({ email });
+  }
+
+  async getById(id: string) {
+    const user = await this.usersRepository.findOne({ id });
+    if (!user) throw new NotFoundException("User's id does not exist");
+    return user;
+  }
+
+  async create(user: CreateUserDto) {
+    const userSchema = this.usersRepository.create(user);
+    this.usersRepository.persistAndFlush(userSchema);
+    return userSchema;
   }
 }
