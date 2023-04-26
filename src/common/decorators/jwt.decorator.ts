@@ -1,14 +1,10 @@
+import { TokenPayload } from '@/utils/types';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-export type JwtDecoded = {
-  iss: string;
-  userId: string;
-};
-
 export const JwtUser = createParamDecorator(
-  (key: keyof JwtDecoded, ctx: ExecutionContext) => {
+  (key: keyof TokenPayload, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    const user = request.user as JwtDecoded;
+    const user = request.user as TokenPayload;
     return key ? user?.[key] : user;
   },
 );

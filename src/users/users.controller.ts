@@ -1,12 +1,71 @@
-import { Controller, Get } from '@nestjs/common';
+import { JwtUser } from '@/common/decorators';
+import { JwtAuthGuard } from '@/common/guards';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { Response } from 'express';
+import { CreateUserDto } from './dto/createUser.dto';
+import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 
-@Controller('users')
+@Controller('user')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  private isDevelopment: boolean;
+
+  constructor(
+    private usersService: UsersService,
+    private config: ConfigService,
+  ) {
+    this.isDevelopment =
+      this.config.get('NODE_ENV') === 'development' ? true : false;
+  }
+
+  @Post('login')
+  @HttpCode(200)
+  async login(
+    @Body() userDto: UserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const accessToken = await this.usersService.login(userDto);
+
+    res
+      .cookie('access_token', accessToken, {
+        httpOnly: true,
+        sameSite: this.isDevelopment ? 'lax' : 'strict',
+        secure: this.isDevelopment ? false : true,
+        expires: new Date(Date.now() + 30 * 60 * 1000),
+      })
+      .send({ status: 'login successfully' });
+  }
+
+  @Post('register')
+  async register(
+    @Body() userDto: CreateUserDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const accessToken = await this.usersService.register(userDto);
+
+    res
+      .cookie('access_token', accessToken, {
+        httpOnly: true,
+        sameSite: this.isDevelopment ? 'lax' : 'strict',
+        secure: this.isDevelopment ? false : true,
+        expires: new Date(Date.now() + 30 * 60 * 1000),
+      })
+      .send({ status: 'register successfully' });
+  }
 
   @Get()
-  async getProfile() {
-    return;
+  @UseGuards(JwtAuthGuard)
+  async getProfile(@JwtUser('userId') id: string) {
+    const user = await this.usersService.getById(id);
+    return user;
   }
 }
