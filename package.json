@@ -9,7 +9,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@nrwl/linter": "^15.9.2",
+    "@nrwl/nest": "^15.9.2",
+    "@nrwl/next": "^15.9.2",
+    "@nrwl/nx-cloud": "latest",
     "nx": "15.9.2",
-    "@nrwl/nx-cloud": "latest"
+    "prettier": "^2.6.2"
   }
 }
