@@ -6,7 +6,9 @@
   "license": "ISC",
   "keywords": [],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
