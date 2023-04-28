@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Minio from 'minio';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable()
 export class MinioService {
