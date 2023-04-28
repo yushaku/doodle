@@ -13,5 +13,18 @@
     "build": {
       "inputs": ["{projectRoot}/**/*.ts"]
     }
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    }
   }
 }
