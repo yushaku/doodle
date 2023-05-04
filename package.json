@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "pnpm --stream -r run start:dev",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "apis": "nx serve apis",
+    "website": "nx serve website"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

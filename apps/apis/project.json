@@ -11,7 +11,7 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/apis",
+        "outputPath": "apps/apis/dist",
         "main": "apps/apis/src/main.ts",
         "tsConfig": "apps/apis/tsconfig.app.json",
         "isolatedConfig": true,
