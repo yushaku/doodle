@@ -11,6 +11,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import { FilesService } from './files.service';
+import { Express } from 'express';
+import { Multer } from 'multer';
 
 @Controller('files')
 export class FilesController {

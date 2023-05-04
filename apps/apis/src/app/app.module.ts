@@ -11,6 +11,7 @@ import { HealthModule } from '../health/health.module';
 import { MetricModule } from '../metric/metric.module';
 import { PrometheusModule } from '../prometheus/prometheus.module';
 import { UsersModule } from '../users/users.module';
+import { AppController } from './app.controller';
 
 const { NODE_ENV = 'development' } = process.env;
 const isTest = NODE_ENV === 'test';
@@ -77,5 +78,6 @@ const isDev = NODE_ENV === 'development';
     UsersModule,
   ],
   providers: [ConfigService],
+  controllers: [AppController],
 })
 export class AppModule {}

@@ -29,7 +29,7 @@ export class HealthService {
   ) {
     const nestUrl = `${this.cf.get('APP_ENDPOINT')}:${this.cf.get(
       'APP_PORT',
-    )}/health/ok`;
+    )}/api`;
 
     this.listOfThingsToMonitor = [
       new NestjsHealthIndicator(this.http, nestUrl, this.promClientService),

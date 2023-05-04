@@ -1,6 +1,5 @@
 import { JwtUser } from '@/common/decorators';
 import { JwtAuthGuard } from '@/common/guards';
-import RequestWithUser from '@/utils/requestWithUser.interface';
 import {
   Body,
   Controller,
@@ -17,6 +16,7 @@ import { Response } from 'express';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
+import { RequestWithUser } from 'types';
 
 @Controller('user')
 export class UsersController {
