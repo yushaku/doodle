@@ -10,7 +10,8 @@
     "build": "nx build",
     "test": "nx test",
     "apis": "pnpm --filter apis start:dev",
-    "web": "pnpm --filter website dev"
+    "web": "pnpm --filter website dev",
+    "build:lib": "pnpm --filter library build"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

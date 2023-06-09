@@ -16,6 +16,15 @@
   }
 }
 
+@layer components {
+  .flexCenter {
+    @apply flex flex-wrap items-center justify-center;
+  }
+
+  .baseText {
+    @apply text-sm text-grayColor md:text-base;
+  }
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
