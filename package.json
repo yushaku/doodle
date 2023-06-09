@@ -9,8 +9,8 @@
     "dev": "pnpm --stream -r run start:dev",
     "build": "nx build",
     "test": "nx test",
-    "apis": "nx serve apis",
-    "website": "nx serve website"
+    "apis": "pnpm --filter apis start:dev",
+    "web": "pnpm --filter website dev"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -41,6 +41,7 @@
     "@nrwl/react": "15.9.3",
     "@nrwl/webpack": "15.9.3",
     "@testing-library/react": "14.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jest": "^29.4.0",
     "@types/node": "18.14.2",
     "@types/react": "18.0.28",
