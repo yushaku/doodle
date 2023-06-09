@@ -24,6 +24,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "styled-components": "5.3.6",
+    "styled-jsx": "5.1.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -40,6 +41,8 @@
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "15.9.3",
     "@nrwl/webpack": "15.9.3",
+    "@swc/core": "^1.2.173",
+    "@swc/jest": "0.2.20",
     "@testing-library/react": "14.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jest": "^29.4.0",

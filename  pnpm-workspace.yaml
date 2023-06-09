@@ -2,3 +2,4 @@ packages:
   - 'apps/**'
   - 'test/**'
   - 'types/*'
+  - 'library/**'
