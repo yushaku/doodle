@@ -29,25 +29,27 @@ const LoginPage = () => {
       },
     });
 
+  console.log({ isValid, isSubmitting, touched, errors });
+
   return (
     <div>
       <div className="grid grid-cols-1 gap-5 w-full">
         <FormInput<UserLoginDto>
-          errors={errors}
-          touched={touched}
-          type="email"
+          errors={errors.email}
+          touched={touched.email}
           onChange={handleChange}
+          type="email"
           name="email"
           label="Email"
           placeholder="Eg. abc@gmail.com"
         />
 
         <FormInput<UserLoginDto>
-          errors={errors}
-          touched={touched}
+          errors={errors.password}
+          touched={touched.password}
+          onChange={handleChange}
           type="password"
           name="password"
-          onChange={handleChange}
           label="Password"
           placeholder="Eg.12*****"
         />
@@ -61,7 +63,7 @@ const LoginPage = () => {
         <div className="flex gap-5 flex-col">
           <button
             type="submit"
-            disabled={!isValid || isSubmitting}
+            // disabled={!isValid || isSubmitting}
             className={`flexCenter border rounded-lg lg:w-[275px] h-[52px] text-white text-xl font-bold ${
               isValid ? 'bg-primaryColor' : 'bg-primaryColor/50'
             }`}
