@@ -6,7 +6,7 @@
 
 ## Development server
 
-Run `nx serve api` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Run `nx serve apis` for a dev server.
 
 ## Understand this workspace
 
@@ -19,3 +19,9 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## want to add other library to current modules
+
+```bash
+p add types --filter apis --workspace
+```

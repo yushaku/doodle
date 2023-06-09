@@ -33,10 +33,21 @@ export class UsersService {
     return accessToken;
   }
 
+  async googleAuth(user: CreateUserDto) {
+    const existedUser = await this.getByEmail(user.email);
+    if (!existedUser) return this.register(user);
+
+    const accessToken = this.common.createAccessToken({
+      userId: existedUser.id,
+    });
+
+    return accessToken;
+  }
+
   async register(userDto: CreateUserDto) {
     const saltRounds = 10;
 
-    const existedUser = this.getByEmail(userDto.email);
+    const existedUser = await this.getByEmail(userDto.email);
     if (existedUser)
       throw new BadRequestException("email's user already existed");
 

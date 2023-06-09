@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const { APP_PORT = 3001 } = process.env;
+  const { APP_PORT = 8005 } = process.env;
   const globalPrefix = 'api';
 
   app.use(cookieParser());

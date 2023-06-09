@@ -6,5 +6,5 @@ export class UserDto {
   email: string;
 
   @IsString()
-  password: string;
+  password?: string;
 }

@@ -1,5 +1,5 @@
 import { JwtUser } from '@/common/decorators';
-import { JwtAuthGuard } from '@/common/guards';
+import { GoogleOAuthGuard, JwtAuthGuard } from '@/common/guards';
 import {
   Body,
   Controller,
@@ -11,7 +11,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UserDto } from './dto/user.dto';
@@ -31,22 +30,24 @@ export class UsersController {
   }
 
   @Get('google')
-  @UseGuards(AuthGuard('google'))
-  googleLogin(@Req() req: Request) {
-    console.log(req.headers);
+  @UseGuards(GoogleOAuthGuard)
+  googleLogin() {
+    return;
   }
 
-  @Get('redirect')
-  @UseGuards(AuthGuard('google'))
-  googleAuthRedirect(@Req() req: RequestWithUser) {
-    if (!req.user) {
-      return 'No user from google';
-    }
+  @Get('google/redirect')
+  @UseGuards(GoogleOAuthGuard)
+  async googleAuthRedirect(@Req() req: RequestWithUser, @Res() res: Response) {
+    const user = req.user as CreateUserDto;
+    const accessToken = await this.usersService.googleAuth(user);
 
-    return {
-      message: 'User information from google',
-      user: req.user,
-    };
+    res.cookie('access_token', accessToken, {
+      httpOnly: true,
+      sameSite: this.isDevelopment ? 'lax' : 'strict',
+      secure: this.isDevelopment ? false : true,
+      expires: new Date(Date.now() + 30 * 60 * 1000),
+    });
+    res.redirect(this.config.get('CLIENT_URL') ?? 'http://localhost:3000');
   }
 
   @Post('login')
