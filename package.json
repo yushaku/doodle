@@ -9,8 +9,10 @@
     "dev": "pnpm --stream -r run start:dev",
     "build": "nx build",
     "test": "nx test",
-    "apis": "pnpm --filter apis start:dev",
-    "web": "pnpm --filter website dev",
+    "dev:apis": "pnpm --filter apis start:dev",
+    "dev:web": "pnpm --filter website dev",
+    "build:apis": "pnpm --filter apis build",
+    "build:web": "pnpm --filter website build",
     "build:lib": "pnpm --filter library build"
   },
   "dependencies": {

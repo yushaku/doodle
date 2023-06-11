@@ -8,3 +8,5 @@ export type User = {
   email: string;
   password: string;
 };
+
+export type UserLoginDto = Omit<User, 'name'>;

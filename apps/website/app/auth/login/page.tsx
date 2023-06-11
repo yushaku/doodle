@@ -1,17 +1,16 @@
 'use client';
 
 import { FormInput } from '@/apps/website/components/Form/Input';
+import { login } from '@/apps/website/services/auth';
+import { UserLoginDto } from '@/types/src';
 import { useFormik } from 'formik';
 import { IconGoogle } from 'library';
 import Link from 'next/link';
 import React from 'react';
-import { User } from 'types';
 import * as Yup from 'yup';
 
-type UserLoginDto = Omit<User, 'name'>;
-
 const LoginPage = () => {
-  const { handleSubmit, handleChange, isValid, isSubmitting, touched, errors } =
+  const { handleSubmit, handleChange, isValid, isSubmitting, values, errors } =
     useFormik({
       validateOnChange: false,
       initialValues: {
@@ -24,20 +23,19 @@ const LoginPage = () => {
           .required('This field is required'),
         password: Yup.string().required('This field is required'),
       }),
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
         console.log(values);
+        login(values);
       },
     });
-
-  console.log({ isValid, isSubmitting, touched, errors });
 
   return (
     <div>
       <div className="grid grid-cols-1 gap-5 w-full">
         <FormInput<UserLoginDto>
           errors={errors.email}
-          touched={touched.email}
           onChange={handleChange}
+          value={values.email}
           type="email"
           name="email"
           label="Email"
@@ -46,7 +44,7 @@ const LoginPage = () => {
 
         <FormInput<UserLoginDto>
           errors={errors.password}
-          touched={touched.password}
+          value={values.password}
           onChange={handleChange}
           type="password"
           name="password"
@@ -63,7 +61,7 @@ const LoginPage = () => {
         <div className="flex gap-5 flex-col">
           <button
             type="submit"
-            // disabled={!isValid || isSubmitting}
+            disabled={!isValid || isSubmitting}
             className={`flexCenter border rounded-lg lg:w-[275px] h-[52px] text-white text-xl font-bold ${
               isValid ? 'bg-primaryColor' : 'bg-primaryColor/50'
             }`}
